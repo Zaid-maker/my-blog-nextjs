@@ -27,7 +27,7 @@ export function getSortedPostsData() {
     /* Returning the id and the data from the parsed file. */
     return {
       id,
-      ...matterResult.data,
+      ...(matterResult.data as { date: string; title: string }),
     };
   });
 
@@ -42,22 +42,10 @@ export function getSortedPostsData() {
 }
 
 export function getAllPostIds() {
+  /* Reading the directory of the posts and returning the file names. */
   const fileNames = fs.readdirSync(postsDirectory);
 
-  // Returns an array that looks like this:
-  // [
-  //   {
-  //     params: {
-  //       id: 'ssg-ssr'
-  //     }
-  //   },
-  //   {
-  //     params: {
-  //       id: 'pre-rendering'
-  //     }
-  //   }
-  // ]
-
+  /* Returning the file names and mapping them to the id. */
   return fileNames.map((fileName) => {
     return {
       params: {
@@ -67,7 +55,7 @@ export function getAllPostIds() {
   });
 }
 
-export async function getPostData(id) {
+export async function getPostData(id: string) {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
