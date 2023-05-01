@@ -6,7 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "date-fns": "^2.29.3",
+    "date-fns": "^2.30.0",
     "gray-matter": "^4.0.3",
     "next": "latest",
     "react": "18.2.0",
